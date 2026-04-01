@@ -119,8 +119,8 @@ const Login = async (req, res) => {
 
       res.cookie("accessToken", token, {
          httpOnly: true,
-         secure: true,      // Required for sameSite: "None" on HTTPS (Render)
-         sameSite: "None",  // Required for cross-site cookie (Vercel -> Render)
+         secure: true,      
+         sameSite: "None",  
       });
 
       return responseHandler(res, 200, true, "Login successful", {
