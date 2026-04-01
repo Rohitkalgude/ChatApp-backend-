@@ -120,7 +120,7 @@ const Login = async (req, res) => {
       res.cookie("accessToken", token, {
          httpOnly: true,
          secure: false,
-         sameSite: "lax",
+         sameSite: "None",
       });
 
       return responseHandler(res, 200, true, "Login successful", {
