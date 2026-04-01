@@ -3,7 +3,7 @@ import fs from "fs";
 
 import { Message } from "../models/Message.js";
 import { User } from "../models/User.js";
-import { io, userScoketMap } from "../index.js";
+import { io, userScoketMap } from "../../index.js";
 
 const getAlluser = async (req, res) => {
    try {

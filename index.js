@@ -6,9 +6,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import http from "http";
 import { Server } from "socket.io";
-import ConnectDB from "./config/db.js";
-import authrouter from "./routes/auth.route.js";
-import Messagerouter from "./routes/Message.route.js";
+import ConnectDB from "./src/config/db.js";
+import authrouter from "./src/routes/auth.route.js";
+import Messagerouter from "./src/routes/Message.route.js";
 
 dotenv.config();
 ConnectDB();
