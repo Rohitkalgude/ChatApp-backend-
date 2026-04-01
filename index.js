@@ -60,17 +60,18 @@ io.on("connection", (socket) => {
    });
 });
 
-// Middlewares
-app.use(express.json());
-app.use(cookieParser());
-app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
-
+// Middlewares — CORS must be first to handle preflight OPTIONS requests
 app.use(
    cors({
       origin: process.env.FRONTEND_URL,
       credentials: true,
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"],
    })
 );
+app.use(express.json());
+app.use(cookieParser());
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use("/api/v1/auth", authrouter);
 app.use("/api/v1/message", Messagerouter);
