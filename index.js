@@ -18,18 +18,9 @@ const app = express();
 const server = http.createServer(app);
 
 //initialize socket.io server
-// export const io = new Server(server, {
-//    cors: {
-//       origin: process.env.FRONTEND_URL,
-//       methods: ["GET", "POST"],
-//       credentials: true,
-//    },
-// });
-
-
 export const io = new Server(server, {
    cors: {
-      origin: "https://chat-app-frontend-alpha-pink.vercel.app/",
+      origin: process.env.FRONTEND_URL,
       methods: ["GET", "POST"],
       credentials: true,
    },
@@ -74,17 +65,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
-// app.use(
-//    cors({
-//       origin: process.env.FRONTEND_URL,
-//       credentials: true,
-//    })
-// );
-
-
 app.use(
    cors({
-      origin: "https://chat-app-frontend-alpha-pink.vercel.app/",
+      origin: process.env.FRONTEND_URL,
       credentials: true,
    })
 );
