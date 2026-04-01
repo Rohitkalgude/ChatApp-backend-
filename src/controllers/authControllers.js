@@ -119,8 +119,8 @@ const Login = async (req, res) => {
 
       res.cookie("accessToken", token, {
          httpOnly: true,
-         secure: false,
-         sameSite: "None",
+         secure: true,       // required when sameSite is "None"
+         sameSite: "None",   // allows cross-site cookie (Vercel → Render)
       });
 
       return responseHandler(res, 200, true, "Login successful", {
@@ -191,8 +191,8 @@ const Logout = async (req, res) => {
    try {
       res.clearCookie("accessToken", {
          httpOnly: true,
-         secure: process.env.NODE_ENV === "production",
-         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+         secure: true,
+         sameSite: "None",
       });
 
       return responseHandler(res, 200, true, "Logout successful");
