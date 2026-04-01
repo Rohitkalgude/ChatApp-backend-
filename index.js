@@ -18,11 +18,9 @@ const app = express();
 const server = http.createServer(app);
 
 //initialize socket.io server
-const FRONTEND_URL = (process.env.FRONTEND_URL || "https://chat-app-frontend-alpha-pink.vercel.app").replace(/\/$/, "");
-
 export const io = new Server(server, {
    cors: {
-      origin: FRONTEND_URL,
+      origin: process.env.FRONTEND_URL,
       methods: ["GET", "POST"],
       credentials: true,
    },
@@ -62,19 +60,17 @@ io.on("connection", (socket) => {
    });
 });
 
-// Middlewares — CORS must be first to handle preflight requests
-app.use(
-   cors({
-      origin: FRONTEND_URL,
-      credentials: true,
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowedHeaders: ["Content-Type", "Authorization"],
-   })
-);
-
+// Middlewares
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+
+app.use(
+   cors({
+      origin: process.env.FRONTEND_URL,
+      credentials: true,
+   })
+);
 
 app.use("/api/v1/auth", authrouter);
 app.use("/api/v1/message", Messagerouter);
