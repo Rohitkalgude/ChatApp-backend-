@@ -89,12 +89,6 @@ const verifyOtp = async (req, res) => {
 
       const token = user.generateToken();
 
-      res.cookie("accessToken", token, {
-         httpOnly: true,
-         secure: true,
-         sameSite: "None",
-      });
-
       return responseHandler(res, 200, true, "OTP verified", { user, token });
    } catch (error) {
       console.log("Error in user verifyOtp:", error.message);
